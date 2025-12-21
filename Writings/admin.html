@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Generator Control Panel | KUWS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Tailwind Config (Same as your website)
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'ku-blue': '#1a3a60',
+                        'ku-gold': '#ffb703',
+                        'ku-light': '#f0f4f8',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Scrollbar styles and font (Same as your website) */
+        html { scroll-behavior: smooth; font-family: 'Inter', sans-serif; }
+        body::-webkit-scrollbar { width: 8px; }
+        body::-webkit-scrollbar-thumb { background-color: #ffb703; border-radius: 4px; }
+        body::-webkit-scrollbar-track { background-color: #1a3a60; }
+        
+        /* Article Styles for Preview */
+        .article-content table {
+            width: 100%;
+            margin: 1rem 0;
+            border-collapse: collapse;
+        }
+        .article-content th, .article-content td {
+            border: 1px solid #e5e7eb; /* gray-200 */
+            padding: 0.75rem;
+            text-align: left;
+        }
+        .article-content th {
+            background-color: #f3f4f6; /* gray-100 */
+            font-weight: 600;
+            color: #1a3a60; /* ku-blue */
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 p-8">
+
+    <div class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-2xl border-t-8 border-ku-blue">
+        <h1 class="text-3xl font-extrabold text-ku-blue mb-8">✍️ নতুন পোস্ট তৈরি করুন (Post Generator)</h1>
+        
+        <form id="post-form" class="space-y-6">
+
+            <div class="flex space-x-4">
+                <div class="w-2/3">
+                    <label for="title" class="block text-sm font-medium text-gray-700">পোস্টের শিরোনাম (Title)</label>
+                    <input type="text" id="title" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-ku-gold focus:border-ku-gold transition">
+                </div>
+                <div class="w-1/3">
+                    <label for="category" class="block text-sm font-medium text-gray-700">ক্যাটাগরি (Category)</label>
+                    <select id="category" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-ku-gold focus:border-ku-gold transition bg-white">
+                        <option value="| মতামত">মতামত</option>
+                        <option value="| লেখা">লেখা</option>
+                        <option value="| ফিচার">ফিচার</option>
+                        <option value="| খবর">খবর</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="flex space-x-4">
+                <div class="w-1/2">
+                    <label for="author" class="block text-sm font-medium text-gray-700">লেখকের নাম (Author)</label>
+                    <input type="text" id="author" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-ku-gold focus:border-ku-gold transition">
+                </div>
+                <div class="w-1/2">
+                    <label for="designation" class="block text-sm font-medium text-gray-700">পদবি (Designation)</label>
+                    <input type="text" id="designation" value="সদস্য, খুবি লেখক সংঘ" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-ku-gold focus:border-ku-gold transition">
+                </div>
+            </div>
+
+            <div class="flex space-x-4">
+                <div class="w-1/2">
+                    <label for="date" class="block text-sm font-medium text-gray-700">তারিখ (Date - যেমন: ২৬ অক্টোবর ২০২৫)</label>
+                    <input type="text" id="date" value="২৬ অক্টোবর ২০২৫" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-ku-gold focus:border-ku-gold transition">
+                </div>
+                <div class="w-1/2">
+                    <label for="image-name" class="block text-sm font-medium text-gray-700">ছবির নাম (Image Name - যেমন: images/1.jpg)</label>
+                    <input type="text" id="image-name" value="images/1.jpg" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-ku-gold focus:border-ku-gold transition">
+                </div>
+            </div>
+
+            <div>
+                <label for="article-body" class="block text-sm font-medium text-gray-700">মূল লেখা (Article Body)</label>
+                <p class="text-xs text-gray-500 mb-2">
+                    **ফরম্যাটিং নির্দেশিকা:** **বোল্ড** এর জন্য `**টেক্সট**`, *ইতালিক* এর জন্য `*টেক্সট*`, হাইপারলিংকের জন্য `[লিংক টেক্সট](url)`, 
+                    বুলেট পয়েন্টের জন্য লাইনের শুরুতে `-`, কোটেশনের জন্য লাইনের শুরুতে `> `, 
+                    ছবির জন্য `[Image: images/your-image.jpg]`, টেবিলের জন্য **সরাসরি HTML কোড** ব্যবহার করুন। 
+                    নতুন অনুচ্ছেদের জন্য দুটি লাইন ব্রেক দিন।
+                </p>
+                <textarea id="article-body" rows="15" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 font-mono text-sm focus:ring-ku-gold focus:border-ku-gold transition" placeholder="আপনার লেখা এখানে লিখুন..."></textarea>
+            </div>
+
+            <button type="button" onclick="generateHTML()" class="w-full py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-ku-gold hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ku-gold transition duration-300">
+                HTML কোড তৈরি করুন
+            </button>
+        </form>
+
+        <div id="output-section" class="mt-10 pt-6 border-t border-gray-300 hidden">
+            <h2 class="text-2xl font-bold text-ku-blue mb-4">জেনারেটেড HTML কোড 📄</h2>
+            <p class="text-sm text-gray-600 mb-4">নিচের পুরো কোডটি কপি করে একটি নতুন `.html` ফাইলে সেভ করুন।</p>
+            <textarea id="html-output" rows="20" class="block w-full border-2 border-ku-blue rounded-md shadow-inner p-4 font-mono text-xs bg-ku-light" readonly></textarea>
+            <button onclick="copyHTML()" class="mt-4 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-ku-blue hover:bg-ku-blue/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ku-blue transition duration-300">
+                কোড কপি করুন
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // --- JavaScript Code for Generator ---
+
+        // আপনার লেখার মূল টেমপ্লেট - এই অংশে কোনো পরিবর্তন করবেন না
+        const templateHTML = (data) => `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${data.title} | KUWS</title>
+
+    <meta property="og:title" content="${data.title} | KUWS">
+    <meta property="og:description" content="${data.ogDescription}">
+    <meta property="og:image" content="${data.imageName}">
+    <meta property="og:url" content="https://kuws.netlify.app/Writings/NEW.html">
+    <meta property="og:type" content="article">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="${data.title} | KUWS">
+    <meta property="twitter:description" content="${data.ogDescription}">
+    <meta name="twitter:image" content="${data.imageName}">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'ku-blue': '#1a3a60',
+                        'ku-gold': '#ffb703',
+                        'ku-light': '#f0f4f8',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html { scroll-behavior: smooth; font-family: 'Inter', sans-serif; }
+        body::-webkit-scrollbar { width: 8px; }
+        body::-webkit-scrollbar-thumb { background-color: #ffb703; border-radius: 4px; }
+        body::-webkit-scrollbar-track { background-color: #1a3a60; }
+        /* Table Style for Article Body */
+        .article-content table {
+            width: 100%;
+            margin: 1rem 0;
+            border-collapse: collapse;
+        }
+        .article-content th, .article-content td {
+            border: 1px solid #e5e7eb; /* gray-200 */
+            padding: 0.75rem;
+            text-align: left;
+        }
+        .article-content th {
+            background-color: #f3f4f6; /* gray-100 */
+            font-weight: 600;
+            color: #1a3a60; /* ku-blue */
+        }
+    </style>
+</head>
+
+<body class="bg-ku-light text-gray-800">
+
+    <header class="bg-ku-blue shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="index.html#home" class="flex items-center space-x-3">
+                    <img src="images/logo.jpg" alt="KU Writers' Society Logo" class="h-10 w-10 rounded-full object-cover">
+                    <span class="text-2xl font-bold text-white tracking-wide">KU Writers' Society</span>
+                </a>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html#home" class="text-white hover:text-ku-gold transition duration-300 font-medium">Home</a>
+                    <a href="index.html#about" class="text-white hover:text-ku-gold transition duration-300 font-medium">About</a>
+                    <a href="index.html#events" class="text-white hover:text-ku-gold transition duration-300 font-medium">Events</a>
+                    <a href="index.html#showcase" class="text-white hover:text-ku-gold transition duration-300 font-medium">Showcase</a>
+                    <a href="index.html#honor-board" class="text-white hover:text-ku-gold transition duration-300 font-medium">Honor Board</a>
+                    <a href="index.html#gallery" class="text-white hover:text-ku-gold transition duration-300 font-medium">Gallery</a>
+                    <a href="index.html#contact" class="text-white hover:text-ku-gold transition duration-300 font-medium">Join Us</a>
+                    <a href="verification.html" class="text-white hover:text-ku-gold transition duration-300 font-medium">Verify Certificate</a>
+                </nav>
+                <button id="mobile-menu-button" class="md:hidden text-white hover:text-ku-gold focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-ku-blue pb-4 border-t border-ku-gold/30">
+            <a href="index.html#home" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition font-medium" onclick="toggleMenu()">Home</a>
+            <a href="index.html#about" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition font-medium" onclick="toggleMenu()">About</a>
+            <a href="index.html#events" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition font-medium" onclick="toggleMenu()">Events</a>
+            <a href="index.html#showcase" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition font-medium" onclick="toggleMenu()">Showcase</a>
+            <a href="index.html#honor-board" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition font-medium" onclick="toggleMenu()">Honor Board</a>
+            <a href="index.html#gallery" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition font-medium" onclick="toggleMenu()">Gallery</a>
+            <a href="index.html#contact" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition font-medium" onclick="toggleMenu()">Join Us</a>
+            <a href="verification.html" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition font-medium" onclick="toggleMenu()">Verify Certificate</a>
+        </div>
+    </header>
+
+    <main>
+
+        <section id="writing" class="py-16 md:py-24 bg-ku-light">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 bg-white rounded-2xl shadow-lg p-8 md:p-12 border-l-8 border-ku-gold">
+                
+                <p class="text-sm font-medium text-ku-gold mb-2 uppercase tracking-wider">${data.category}</p>
+
+                <h1 class="text-3xl md:text-4xl font-extrabold text-ku-blue mb-4">${data.title}</h1>
+
+                <div class="text-sm text-gray-500 mb-6">
+                    <div class="mb-1">
+                        <span class="font-semibold text-ku-blue">${data.author}</span>
+                        <span class="text-gray-600 text-sm ml-1">${data.designation}</span>
+                    </div>
+                    <div class="text-xs">${data.date}</div>
+                </div>
+
+                <img src="${data.imageName}" alt="${data.title}" class="rounded-xl shadow-md w-full h-72 object-cover mb-8">
+                
+                <div class="text-gray-700 leading-relaxed space-y-4 text-justify article-content">
+                    ${data.formattedBody}
+                </div>
+                
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-ku-blue text-white py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div>
+                <span class="text-xl font-bold text-ku-gold">Khulna University Writers' Society</span>
+                <p class="mt-2 text-sm text-gray-300">Powered by the passion of Khulna University students.</p>
+            </div>
+
+            <div>
+                <h5 class="text-lg font-semibold mb-3">Quick Links</h5>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="ourstory.html" class="hover:text-ku-gold transition">Our Story</a></li>
+                    <li><a href="events.html" class="hover:text-ku-gold transition">Upcoming Activities</a></li>
+                    <li><a href="headlines.html" class="hover:text-ku-gold transition">Read Member Work</a></li>
+                    <li><a href="honorboard.html" class="hover:text-ku-gold transition">Honor Board</a></li>
+                    <li><a href="index.html#writer-assistant" class="hover:text-ku-gold transition">Writer's Muse</a></li>
+                    <li><a href="verification.html" class="hover:text-ku-gold transition">Certificate Verification</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h5 class="text-lg font-semibold mb-3">Resources</h5>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="logo.html" class="hover:text-ku-gold transition">KU related Logo</a></li>
+                    <li><a href="https://dsa.ku.ac.bd/clubs" class="hover:text-ku-gold transition">KU Club List</a></li>
+                    <li><a href="https://ku.ac.bd" class="hover:text-ku-gold transition">KU Official Site</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h5 class="text-lg font-semibold mb-3">Get In Touch</h5>
+                <p class="text-sm">
+                    <span class="block">Email: kuwriterssociety@gmail.com</span>
+                    <span class="block mt-2">Khulna University, Khulna-9208</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="mt-10 pt-6 border-t border-ku-gold/30 text-center text-sm text-gray-400">
+            &copy; <span id="current-year"></span> Khulna University Writers' Society. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        function toggleMenu() { mobileMenu.classList.toggle('hidden'); }
+        mobileMenuButton.addEventListener('click', toggleMenu);
+    </script>
+
+</body>
+</html>`;
+
+        function formatArticleBody(text) {
+            const lines = text.trim().split('\n');
+            let finalHtml = '';
+            let inList = false;
+
+            // Helper for applying inline formatting inside blocks
+            function applyInlineFormatting(line) {
+                // Bold
+                line = line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                // Italic
+                line = line.replace(/\*(.*?)\*/g, '<em>$1</em>');
+                // Hyperlink
+                line = line.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" class="text-ku-blue hover:text-ku-gold underline transition" target="_blank">$1</a>');
+                return line;
+            }
+
+            let currentBlock = '';
+
+            for (const line of lines) {
+                const trimmedLine = line.trim();
+
+                if (trimmedLine.startsWith('>')) {
+                    // Blockquote
+                    if (currentBlock) {
+                        finalHtml += `<p>${applyInlineFormatting(currentBlock)}</p>\n`;
+                        currentBlock = '';
+                    }
+                    finalHtml += `<blockquote class="border-l-4 border-ku-gold pl-4 italic text-gray-600 my-4"><p>${applyInlineFormatting(trimmedLine.substring(1).trim())}</p></blockquote>\n`;
+                    inList = false;
+                } else if (trimmedLine.startsWith('-')) {
+                    // List Item
+                    if (currentBlock) {
+                         finalHtml += `<p>${applyInlineFormatting(currentBlock)}</p>\n`;
+                        currentBlock = '';
+                    }
+                    if (!inList) {
+                        finalHtml += `<ul class="list-disc list-inside ml-4 space-y-2 my-4">\n`;
+                        inList = true;
+                    }
+                    finalHtml += `<li>${applyInlineFormatting(trimmedLine.substring(1).trim())}</li>\n`;
+                } else if (trimmedLine === '') {
+                    // New Paragraph / End of List
+                    if (currentBlock) {
+                        finalHtml += `<p>${applyInlineFormatting(currentBlock)}</p>\n`;
+                        currentBlock = '';
+                    }
+                    if (inList) {
+                        finalHtml += `</ul>\n`;
+                        inList = false;
+                    }
+                    // Skip empty line to preserve paragraph separation
+                } else if (trimmedLine.match(/\[Image: (.*?)\]/)) {
+                    // Image Tag
+                    if (currentBlock) {
+                        finalHtml += `<p>${applyInlineFormatting(currentBlock)}</p>\n`;
+                        currentBlock = '';
+                    }
+                    finalHtml += trimmedLine.replace(/\[Image: (.*?)\]/g, (match, p1) => {
+                        return `<img src="${p1.trim()}" alt="Post-related Image" class="rounded-xl shadow-md w-full my-6 object-cover h-64 md:h-80 mx-auto">`;
+                    }) + '\n';
+                    inList = false;
+                } else {
+                    // Regular text (handle table HTML as one big block)
+                    if (inList) {
+                        finalHtml += `</ul>\n`;
+                        inList = false;
+                    }
+                    
+                    if (currentBlock) {
+                        currentBlock += ' ' + trimmedLine; // Treat single newline as space within a block
+                    } else {
+                        currentBlock = trimmedLine;
+                    }
+                }
+            }
+
+            // Append any remaining block
+            if (currentBlock) {
+                finalHtml += `<p>${applyInlineFormatting(currentBlock)}</p>\n`;
+            }
+            if (inList) {
+                finalHtml += `</ul>\n`;
+            }
+
+            return finalHtml.trim();
+        }
+
+        function generateHTML() {
+            const title = document.getElementById('title').value.trim();
+            const category = document.getElementById('category').value.trim();
+            const author = document.getElementById('author').value.trim();
+            const designation = document.getElementById('designation').value.trim();
+            const date = document.getElementById('date').value.trim();
+            const imageName = document.getElementById('image-name').value.trim();
+            const articleBody = document.getElementById('article-body').value.trim();
+
+            if (!title || !author || !articleBody) {
+                alert("অনুগ্রহ করে শিরোনাম, লেখকের নাম এবং মূল লেখা পূরণ করুন।");
+                return;
+            }
+
+            // Use the first 200 characters of the body for OG Description
+            const ogDescription = articleBody.substring(0, 200).replace(/\n/g, ' ').trim() + '...';
+
+            const formattedBody = formatArticleBody(articleBody);
+
+            const data = {
+                title: title,
+                category: category,
+                author: author,
+                designation: designation,
+                date: date,
+                imageName: imageName,
+                formattedBody: formattedBody,
+                ogDescription: ogDescription
+            };
+
+            const finalHTML = templateHTML(data);
+            
+            document.getElementById('html-output').value = finalHTML;
+            document.getElementById('output-section').classList.remove('hidden');
+
+            // Scroll to the output section
+            document.getElementById('output-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function copyHTML() {
+            const output = document.getElementById('html-output');
+            output.select();
+            output.setSelectionRange(0, 99999); // For mobile devices
+            document.execCommand('copy');
+            alert("HTML কোড কপি করা হয়েছে!");
+        }
+    </script>
+
+</body>
+</html>

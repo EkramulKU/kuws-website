@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>বই পড়ার অভ্যাস বাড়াতে হবে | KUWS</title>
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="পথে পথে ময়লার স্তূপ | KUWS">
+  <meta property="og:description" content="খুলনা বিশ্ববিদ্যালয় থেকে পিটিআই পর্যন্ত যাত্রাপথটি সময়ে খুবই সংক্ষিপ্ত,মাত্র কয়েক মিনিটের অটো বা রিকশার পথ। কিন্তু এই অল্প দূরত্বেই চারটি স্থানে গল্লামারী মোড়, নিরালা, সাতরাস্তা এবং পিটিআই-এর সামনে প্রতিনিয়ত ময়লার স্তূপ চোখে পড়ে। ">
+  <meta property="og:image" content="images/2.jpg">
+  <meta property="og:url" content="https://kuws.netlify.app/Writings/2.html">
+  <meta property="og:type" content="article">
+
+  <!-- Twitter Card Meta -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="পথে পথে ময়লার স্তূপ | KUWS">
+  <meta property="twitter:description" content="খুলনা বিশ্ববিদ্যালয় থেকে পিটিআই পর্যন্ত যাত্রাপথটি সময়ে খুবই সংক্ষিপ্ত,মাত্র কয়েক মিনিটের অটো বা রিকশার পথ। কিন্তু এই অল্প দূরত্বেই চারটি স্থানে গল্লামারী মোড়, নিরালা, সাতরাস্তা এবং পিটিআই-এর সামনে প্রতিনিয়ত ময়লার স্তূপ চোখে পড়ে।">
+  <meta name="twitter:image" content="images/2.jpg">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            'ku-blue': '#1a3a60',
+            'ku-gold': '#ffb703',
+            'ku-light': '#f0f4f8',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; font-family: 'Inter', sans-serif; }
+    body::-webkit-scrollbar { width: 8px; }
+    body::-webkit-scrollbar-thumb { background-color: #ffb703; border-radius: 4px; }
+    body::-webkit-scrollbar-track { background-color: #1a3a60; }
+  </style>
+</head>
+
+<body class="bg-ku-light text-gray-800">
+
+  <!-- Header & Navigation -->
+  <header class="bg-ku-blue shadow-lg sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
+        <a href="index.html#home" class="flex items-center space-x-3">
+          <img src="images/logo.jpg" alt="KU Writers' Society Logo" class="h-10 w-10 rounded-full object-cover">
+          <span class="text-2xl font-bold text-white tracking-wide">KU Writers' Society</span>
+        </a>
+        <nav class="hidden md:flex space-x-8">
+          <a href="index.html#home" class="text-white hover:text-ku-gold transition duration-300 font-medium">Home</a>
+          <a href="index.html#about" class="text-white hover:text-ku-gold transition duration-300 font-medium">About</a>
+          <a href="index.html#events" class="text-white hover:text-ku-gold transition duration-300 font-medium">Events</a>
+          <a href="index.html#showcase" class="text-white hover:text-ku-gold transition duration-300 font-medium">Showcase</a>
+          <a href="index.html#honor-board" class="text-white hover:text-ku-gold transition duration-300 font-medium">Honor Board</a>
+          <a href="index.html#gallery" class="text-white hover:text-ku-gold transition duration-300 font-medium">Gallery</a>
+          <a href="index.html#contact" class="text-white hover:text-ku-gold transition duration-300 font-medium">Join Us</a>
+          <a href="verification.html" class="text-white hover:text-ku-gold transition duration-300 font-medium">Verify Certificate</a>
+        </nav>
+        <button id="mobile-menu-button" class="md:hidden text-white hover:text-ku-gold focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-ku-blue pb-4 border-t border-ku-gold/30">
+      <a href="index.html#home" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition font-medium" onclick="toggleMenu()">Home</a>
+      <a href="index.html#about" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition font-medium" onclick="toggleMenu()">About</a>
+      <a href="index.html#events" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition font-medium" onclick="toggleMenu()">Events</a>
+      <a href="index.html#showcase" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition font-medium" onclick="toggleMenu()">Showcase</a>
+      <a href="index.html#honor-board" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition font-medium" onclick="toggleMenu()">Honor Board</a>
+      <a href="index.html#gallery" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition font-medium" onclick="toggleMenu()">Gallery</a>
+      <a href="index.html#contact" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition font-medium" onclick="toggleMenu()">Join Us</a>
+      <a href="verification.html" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition font-medium" onclick="toggleMenu()">Verify Certificate</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ✍️ Writing Section -->
+    <section id="writing" class="py-16 md:py-24 bg-ku-light">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 bg-white rounded-2xl shadow-lg p-8 md:p-12 border-l-8 border-ku-gold">
+        
+        <!-- NEW: Article type added above the title -->
+        <p class="text-sm font-medium text-ku-gold mb-2 uppercase tracking-wider">| মতামত</p>
+
+        <h1 class="text-3xl md:text-4xl font-extrabold text-ku-blue mb-4">পথে পথে ময়লার স্তূপ</h1>
+
+        <!-- UPDATED: Author details reformatted. Removed 'By', added 'সদস্য, খুবি লেখক সংঘ' designation, and moved date. -->
+        <div class="text-sm text-gray-500 mb-6">
+          <div class="mb-1">
+            <span class="font-semibold text-ku-blue">সানজিদা আক্তার</span>
+            <span class="text-gray-600 text-sm ml-1">সদস্য, খুবি লেখক সংঘ</span>
+          </div>
+          <div class="text-xs">২৬ অক্টোবর ২০২৫</div> 
+        </div>
+
+        <!-- REMOVED: Share buttons removed as requested -->
+        
+        <!-- Image remains -->
+        <img src="images/2.jpg" alt="পথে পথে ময়লার স্তূপ" class="rounded-xl shadow-md w-full h-72 object-cover mb-8">
+        
+        <div class="text-gray-700 leading-relaxed space-y-4 text-justify">
+          <p>খুলনা বিশ্ববিদ্যালয় থেকে পিটিআই পর্যন্ত যাত্রাপথটি সময়ে খুবই সংক্ষিপ্ত,মাত্র কয়েক মিনিটের অটো বা রিকশার পথ। কিন্তু এই অল্প দূরত্বেই চারটি স্থানে গল্লামারী মোড়, নিরালা, সাতরাস্তা এবং পিটিআই-এর সামনে প্রতিনিয়ত ময়লার স্তূপ চোখে পড়ে। এসব স্থান যেন খুলনা শহরের পরিচ্ছন্নতার ঘাটতির এক জীবন্ত উদাহরণ হয়ে উঠেছে।</p>
+
+<p>প্রতিদিন শত শত শিক্ষার্থী, শিক্ষক, কর্মকর্তা-কর্মচারী এবং সাধারণ মানুষ এই পথে চলাচল করেন। অথচ দুর্গন্ধ, উড়ন্ত পলিথিন, মশা-মাছির উৎপাত এবং পচা ময়লার দৃশ্য তাদের জন্য এক অস্বস্তিকর ও অস্বাস্থ্যকর পরিবেশ সৃষ্টি করছে। শহরের সৌন্দর্য যেমন নষ্ট হচ্ছে, তেমনি শিক্ষাবান্ধব পরিবেশও মারাত্মকভাবে ক্ষতিগ্রস্ত হচ্ছে।</p>
+
+<p>এই পরিস্থিতি আমাদের সামাজিক দায়িত্ববোধের ঘাটতিও প্রকাশ করে। ময়লা ফেলার নির্দিষ্ট স্থান না থাকা, সিটি কর্পোরেশনের নিয়মিত পরিচ্ছন্নতা কার্যক্রমের ঘাটতি এবং নাগরিকদের অসচেতন আচরণ। সব মিলিয়ে এই সমস্যাকে আরও গভীর করছে।</p>
+
+<p>খুলনা সিটি কর্পোরেশনকে নির্দিষ্ট স্থানে পর্যাপ্ত ডাস্টবিন স্থাপন, নিয়মিত ময়লা অপসারণ ও পরিচ্ছন্নতা অভিযান পরিচালনা করতে হবে। পরিচ্ছন্ন শহর মানেই উন্নত জীবনযাত্রা ও শিক্ষার অনুকূল পরিবেশ। খুলনা শহরের সৌন্দর্য রক্ষায় আমাদের প্রত্যেকের ছোট ছোট পদক্ষেপই হতে পারে বড় পরিবর্তনের সূচনা। </p></br>
+
+         <p>ইএইচ</p>
+        </div>
+        
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-ku-blue text-white py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-8">
+      <div>
+        <span class="text-xl font-bold text-ku-gold">Khulna University Writers' Society</span>
+        <p class="mt-2 text-sm text-gray-300">Powered by the passion of Khulna University students.</p>
+      </div>
+
+      <div>
+        <h5 class="text-lg font-semibold mb-3">Quick Links</h5>
+        <ul class="space-y-2 text-sm">
+          <li><a href="ourstory.html" class="hover:text-ku-gold transition">Our Story</a></li>
+          <li><a href="events.html" class="hover:text-ku-gold transition">Upcoming Activities</a></li>
+          <li><a href="headlines.html" class="hover:text-ku-gold transition">Read Member Work</a></li>
+          <li><a href="honorboard.html" class="hover:text-ku-gold transition">Honor Board</a></li>
+          <li><a href="index.html#writer-assistant" class="hover:text-ku-gold transition">Writer's Muse</a></li>
+          <li><a href="verification.html" class="hover:text-ku-gold transition">Certificate Verification</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5 class="text-lg font-semibold mb-3">Resources</h5>
+        <ul class="space-y-2 text-sm">
+          <li><a href="logo.html" class="hover:text-ku-gold transition">KU related Logo</a></li>
+          <li><a href="https://dsa.ku.ac.bd/clubs" class="hover:text-ku-gold transition">KU Club List</a></li>
+          <li><a href="https://ku.ac.bd" class="hover:text-ku-gold transition">KU Official Site</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5 class="text-lg font-semibold mb-3">Get In Touch</h5>
+        <p class="text-sm">
+          <span class="block">Email: kuwriterssociety@gmail.com</span>
+          <span class="block mt-2">Khulna University, Khulna-9208</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-10 pt-6 border-t border-ku-gold/30 text-center text-sm text-gray-400">
+      &copy; <span id="current-year"></span> Khulna University Writers' Society. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    function toggleMenu() { mobileMenu.classList.toggle('hidden'); }
+    mobileMenuButton.addEventListener('click', toggleMenu);
+  </script>
+
+</body>
+</html>
