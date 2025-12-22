@@ -24,6 +24,7 @@
         }
       }
     }
+
   </script>
 
   <style>
@@ -31,6 +32,20 @@
     body::-webkit-scrollbar { width: 8px; }
     body::-webkit-scrollbar-thumb { background-color: #ffb703; border-radius: 4px; }
     body::-webkit-scrollbar-track { background-color: #1a3a60; }
+
+@font-face {
+  font-family: 'SolaimanLipi';
+  src: url('fonts/SolaimanLipi.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Only Bangla notice content */
+.notice-bangla {
+  font-family: 'SolaimanLipi', serif;
+  font-size: 1.05rem;
+  line-height: 1.9;
+}
   </style>
 </head>
 
@@ -123,9 +138,10 @@ fetch('https://api.github.com/repos/EkramulKU/kuws-website/contents/content/noti
               ${urgent ? '🔴 ' : ''}${title}
             </h2>
             <p class="text-sm text-gray-500 mb-4">${date}</p>
-            <div class="prose prose-gray max-w-none">
-              ${marked.parse(bodyMarkdown)}
-            </div>
+<div class="prose prose-gray max-w-none notice-bangla">
+  ${marked.parse(bodyMarkdown)}
+</div>
+
           `;
 
           container.appendChild(card);
