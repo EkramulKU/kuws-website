@@ -54,6 +54,17 @@
         animation: blink 0.6s infinite ease-in-out; /* 0.6 সেকেন্ডে দ্রুত ব্লিঙ্ক করবে */
         color: #E53E3E !important; /* টেক্সটের রং লাল (#E53E3E) করা হয়েছে */
     }
+
+        @keyframes marquee {
+  0%   { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.animate-marquee {
+  display: inline-block;
+  animation: marquee 25s linear infinite;
+}
+
     </style>
 </head>
 <body class="bg-ku-light text-gray-800">
@@ -97,27 +108,30 @@
 
 
 <!-- Notice Banner (Joruri Biggapti) - এখন Marquee Loop করবে -->
-        <div id="urgentNotice" class="bg-ku-gold p-4 text-center text-ku-blue font-semibold shadow-xl flex justify-between items-center transition-[max-height,padding] duration-500 ease-in-out" style="max-height: 200px; padding-top: 0.25rem; padding-bottom: 0.25rem;">
-            <marquee behavior="scroll" direction="left" scrollamount="6" class="flex-grow max-w-5xl mx-auto" loop="100">
-                <p class="flex items-center justify-center space-x-4 text-sm sm:text-base whitespace-nowrap">
-                    <span class="font-bold text-lg mr-3 flex-shrink-0">🔔 Notices <ul id="notice-list"></ul>
-                    </span>
-                    <span class="text-base font-medium flex-shrink-0">To download your Editorial Quiz participation certificate</span>
-                    <!-- এখানে blink-effect ক্লাসটি যোগ করা হয়েছে -->
-                    <a href="Certificate Download.html" class="ml-4 underline hover:text-red-600 transition duration-200 font-bold flex-shrink-0 blink-effect">CLICK HERE &rarr;</a>
-                    
-                    <!-- ডাবল লুপের জন্য টেক্সট রিপিট করা হলো -->
-                    <span class="font-bold text-lg ml-10 mr-3 flex-shrink-0">*** Important Update:</span>
-                    <span class="text-base font-medium flex-shrink-0">To download your Editorial Quiz participation certificate</span>
-                    <a href="Certificate Download.html" class="ml-4 underline hover:text-red-600 transition duration-200 font-bold flex-shrink-0 blink-effect">CLICK HERE &rarr;</a>
-                </p>
-            </marquee>
+<div id="urgentNotice"
+     class="bg-ku-gold p-3 text-ku-blue font-semibold shadow-xl flex items-center gap-4">
 
-            <button id="closeNotice" class="text-ku-blue hover:text-ku-blue/80 text-2xl leading-none font-bold ml-4 p-1 rounded-full hover:bg-ku-blue/10 flex-shrink-0" aria-label="Close Notice">
-                &times;
-            </button>
-      
-        </div>
+  <!-- LEFT FIXED LABEL -->
+  <a href="notices.html"
+     class="flex-shrink-0 font-bold text-lg underline hover:text-red-600 transition">
+    🔔 Notices
+  </a>
+
+  <!-- RIGHT SCROLLING AREA -->
+  <div class="overflow-hidden flex-1">
+    <div id="notice-marquee"
+         class="whitespace-nowrap animate-marquee">
+      <!-- notices will be injected here -->
+    </div>
+  </div>
+
+  <!-- CLOSE BUTTON -->
+  <button id="closeNotice"
+          class="text-ku-blue text-2xl font-bold ml-2 hover:text-ku-blue/70">
+    &times;
+  </button>
+</div>
+
 
     <main>
         <!-- 1. Hero Section --><section id="home" class="relative bg-ku-blue py-20 md:py-32 text-center overflow-hidden">
@@ -513,11 +527,40 @@ fetch('https://api.github.com/repos/EkramulKU/kuws-website/contents/content/noti
         });
     });
   });
+
+<script>
+fetch('https://api.github.com/repos/EkramulKU/kuws-website/contents/content/notices')
+  .then(res => res.json())
+  .then(files => {
+
+    // নতুন notice আগে দেখানোর জন্য sort
+    files.sort((a, b) => new Date(b.name) - new Date(a.name));
+
+    const marquee = document.getElementById('notice-marquee');
+
+    files.forEach(file => {
+      fetch(file.download_url)
+        .then(r => r.text())
+        .then(text => {
+          const titleMatch = text.match(/title:\s*(.*)/);
+          if (titleMatch) {
+            const span = document.createElement('span');
+            span.className = "mr-12";
+            span.textContent = "• " + titleMatch[1];
+            marquee.appendChild(span);
+          }
+        });
+    });
+  });
+</script>
+
+
 </script>
 
     
 </body>
 </html>
+
 
 
 
