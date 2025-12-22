@@ -30,6 +30,16 @@ tailwind.config = {
   }
 }
 </script>
+
+<!-- Open Graph Meta (for Facebook / WhatsApp preview) -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Khulna University Writers' Society">
+<meta property="og:title" content="">
+<meta property="og:description" content="">
+<meta property="og:image" content="">
+<meta property="og:url" content="">
+
+  
 </head>
 
 <body class="bg-ku-light text-gray-800">
@@ -178,6 +188,25 @@ fetch(`https://raw.githubusercontent.com/EkramulKU/kuws-website/main/content/wri
 .then(res => res.text())
 .then(text => {
 
+  function get(key) {
+  const match = text.match(new RegExp(key + ':\\s*(.*)'));
+  return match ? match[1].trim() : '';
+}
+// ===== SET OPEN GRAPH META =====
+document.querySelector('meta[property="og:title"]')
+  .setAttribute('content', get('og_title') || get('title'));
+
+document.querySelector('meta[property="og:description"]')
+  .setAttribute('content', get('og_description'));
+
+document.querySelector('meta[property="og:image"]')
+  .setAttribute('content', get('og_image'));
+
+document.querySelector('meta[property="og:url"]')
+  .setAttribute('content', window.location.href);
+
+document.title = (get('og_title') || get('title')) + ' | KU Writers\' Society';
+
   const get = k => text.match(new RegExp(k + ':\\s*(.*)'))?.[1] || '';
   const body = text.split('---').pop().trim();
 
@@ -218,4 +247,5 @@ fetch(`https://raw.githubusercontent.com/EkramulKU/kuws-website/main/content/wri
 
 </body>
 </html>
+
 
