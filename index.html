@@ -501,6 +501,29 @@ Participants will be required to regularly read the editorials published in two 
     }
 
     </script>
+
+<script>
+fetch('https://api.github.com/repos/EkramulKU/kuws-website/contents/content/notices')
+  .then(res => res.json())
+  .then(files => {
+    const list = document.getElementById('notice-list');
+    files.forEach(file => {
+      fetch(file.download_url)
+        .then(r => r.text())
+        .then(text => {
+          const titleMatch = text.match(/title:\s*(.*)/);
+          if (titleMatch) {
+            const li = document.createElement('li');
+            li.textContent = titleMatch[1];
+            list.appendChild(li);
+          }
+        });
+    });
+  });
+</script>
+
+    
 </body>
 </html>
+
 
