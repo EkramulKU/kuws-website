@@ -7,28 +7,25 @@ media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
 collections:
+
+  # ================= NOTICES =================
   - name: "notices"
-    label: "Notices"
+    label: "📢 Notices"
     folder: "content/notices"
     create: true
     slug: "{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
-
       - { label: "Publish Date", name: "date", widget: "datetime" }
-
       - { label: "Show on Home Page (Marquee)", name: "show_on_home", widget: "boolean", default: false }
-
       - { label: "Pinned (Show First)", name: "pinned", widget: "boolean", default: false }
-
       - { label: "Urgent Notice", name: "urgent", widget: "boolean", default: false }
-
       - { label: "Expire After (optional)", name: "expiry", widget: "datetime", required: false }
-
       - { label: "Description", name: "body", widget: "markdown" }
 
+  # ================= EVENTS =================
   - name: "events"
-    label: "Events"
+    label: "📅 Events"
     folder: "content/events"
     create: true
     slug: "{{slug}}"
@@ -41,9 +38,9 @@ collections:
       - { label: "Cover Photo", name: "cover", widget: "image" }
       - { label: "Detailed Description", name: "body", widget: "markdown" }
 
-
+  # ================= HONOR BOARD =================
   - name: "honorboard"
-    label: "Honor Board"
+    label: "🏅 Honor Board"
     folder: "content/honorboard"
     create: true
     slug: "{{slug}}"
@@ -51,3 +48,52 @@ collections:
       - { label: "Name", name: "title", widget: "string" }
       - { label: "Achievement", name: "body", widget: "markdown" }
       - { label: "Year", name: "year", widget: "string" }
+
+  # ================= WRITINGS / LEKHA =================
+  - name: "writings"
+    label: "✍️ Writings (Lekha)"
+    folder: "content/writings"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+
+      - label: "Type"
+        name: "type"
+        widget: "select"
+        options: ["মতামত", "কবিতা", "গল্প"]
+
+      - { label: "Writer", name: "writer", widget: "string" }
+      - { label: "Writer Introduction", name: "intro", widget: "string" }
+      - { label: "Date", name: "date", widget: "string" }
+
+      - { label: "Headline Image", name: "image", widget: "image", required: false }
+
+      - label: "Highlight (Homepage + OG)"
+        name: "highlight"
+        widget: "text"
+
+      - { label: "Uploader", name: "uploader", widget: "string", default: "Admin" }
+
+      # ---------- Open Graph (Social Share) ----------
+      - label: "OG Title"
+        name: "og_title"
+        widget: "string"
+        required: false
+        hint: "খালি রাখলে Title ব্যবহার হবে"
+
+      - label: "OG Description"
+        name: "og_description"
+        widget: "text"
+        required: false
+        hint: "খালি রাখলে Highlight ব্যবহার হবে"
+
+      - label: "OG Image"
+        name: "og_image"
+        widget: "image"
+        required: false
+        hint: "খালি রাখলে Headline Image ব্যবহার হবে"
+
+      - { label: "Body", name: "body", widget: "markdown" }
