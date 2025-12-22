@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>All Notices</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-ku-light p-6">
+
+<h1 class="text-3xl font-bold text-ku-blue mb-6">All Notices</h1>
+<ul id="all-notices" class="space-y-4"></ul>
+
+<script>
+fetch('https://api.github.com/repos/EkramulKU/kuws-website/contents/content/notices')
+  .then(res => res.json())
+  .then(files => {
+
+    files.sort((a, b) => new Date(b.name) - new Date(a.name));
+
+    const list = document.getElementById('all-notices');
+
+    files.forEach(file => {
+      fetch(file.download_url)
+        .then(r => r.text())
+        .then(text => {
+          const title = text.match(/title:\s*(.*)/)?.[1];
+          const body = text.split('---').pop();
+
+          if (title) {
+            const li = document.createElement('li');
+            li.className = "bg-white p-4 rounded shadow";
+            li.innerHTML = `<h3 class="font-bold text-lg">${title}</h3>
+                            <div class="mt-2 text-gray-700">${body}</div>`;
+            list.appendChild(li);
+          }
+        });
+    });
+  });
+</script>
+
+</body>
+</html>
