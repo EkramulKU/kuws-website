@@ -122,10 +122,13 @@
      class="bg-ku-gold p-3 text-ku-blue font-semibold shadow-xl flex items-center gap-4">
 
   <!-- LEFT FIXED LABEL -->
-  <a href="notices.html"
-     class="flex-shrink-0 font-bold text-lg underline hover:text-red-600 transition">
-    🔔 Notices
-  </a>
+ <a href="/notices" class="font-bold underline mr-6 flex-shrink-0">
+  🔔 Notices
+</a>
+
+<marquee behavior="scroll" direction="left" scrollamount="6" class="flex-grow">
+  <div id="notice-list" class="flex items-center"></div>
+</marquee>
 
   <!-- RIGHT SCROLLING AREA -->
   <div class="overflow-hidden flex-1">
@@ -538,30 +541,38 @@ fetch('https://api.github.com/repos/EkramulKU/kuws-website/contents/content/noti
     });
   });
 
-<script>
-fetch('https://api.github.com/repos/EkramulKU/kuws-website/contents/content/notices')
-  .then(res => res.json())
-  .then(files => {
 
-    // GitHub API default order newest → oldest
-    const marquee = document.getElementById('notice-marquee');
 
-    let combinedText = '';
 
-    files.forEach(file => {
-      fetch(file.download_url)
+    
+fetch('https://api.github.com/repos/EkramulKU/kuws-website/contents/content/notices?ref=main', {
+  cache: "no-store"
+})
+.then(res => res.json())
+.then(files => {
+  const list = document.getElementById('notice-list');
+  list.innerHTML = '';
+
+  // নতুন notice আগে দেখানোর জন্য reverse
+  files
+    .filter(file => file.name.endsWith('.md'))
+    .reverse()
+    .forEach(file => {
+      fetch(file.download_url, { cache: "no-store" })
         .then(r => r.text())
         .then(text => {
-          const title = text.match(/title:\s*(.*)/)?.[1];
-          if (title) {
-            combinedText += ` • ${title} `;
-            marquee.textContent = combinedText + combinedText; 
-            // duplicate for smooth loop
-          }
+          const title = text.match(/title:\s*(.*)/)?.[1] || '';
+          const slug = file.name.replace('.md', '');
+
+          const span = document.createElement('span');
+          span.className = "mr-10 whitespace-nowrap";
+          span.innerHTML = `🔔 ${title}`;
+
+          list.appendChild(span);
         });
     });
-  });
-</script>
+});
+
 
 
 
@@ -570,6 +581,7 @@ fetch('https://api.github.com/repos/EkramulKU/kuws-website/contents/content/noti
     
 </body>
 </html>
+
 
 
 
