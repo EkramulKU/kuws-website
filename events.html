@@ -25,9 +25,46 @@ tailwind.config = {
 
 <body class="bg-ku-light text-gray-800">
 
-<header class="bg-ku-blue text-white py-10 text-center">
+      <!-- Header & Navigation --><header class="bg-ku-blue shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="#home" class="flex items-center space-x-3">
+                    <!-- LOGO IMAGE HERE --><img src="images/logo.jpg" alt="KU Writers' Society Logo" class="h-10 w-10 rounded-full object-cover">
+                    <span class="text-2xl font-bold text-white tracking-wide">KU Writers' Society</span>
+                </a>
+                
+                <!-- Desktop Navigation --><nav class="hidden md:flex space-x-8">
+                    <a href="home.html" class="text-white hover:text-ku-gold transition duration-300 font-medium">Home</a>
+                    <a href="about.html" class="text-white hover:text-ku-gold transition duration-300 font-medium">About</a>
+                    <a href="events.html" class="text-white hover:text-ku-gold transition duration-300 font-medium">Events</a>
+                    <a href="index.html" class="text-white hover:text-ku-gold transition duration-300 font-medium">Showcase</a>
+                    <a href="honor-board.html" class="text-white hover:text-ku-gold transition duration-300 font-medium">Honor Board</a>
+                    <a href="gallery.html" class="text-white hover:text-ku-gold transition duration-300 font-medium">Gallery</a>
+                    <a href="#contact" class="text-white hover:text-ku-gold transition duration-300 font-medium">Join Us</a>
+                    <a href="verification.html" class="text-white hover:text-ku-gold transition duration-300 font-medium">Verify Certificate</a>
+                </nav>
+
+                <!-- Mobile Menu Button --><button id="mobile-menu-button" class="md:hidden text-white hover:text-ku-gold focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) --><div id="mobile-menu" class="hidden md:hidden bg-ku-blue pb-4 border-t border-ku-gold/30">
+            <a href="home.html" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition duration-300 font-medium" onclick="toggleMenu()">Home</a>
+            <a href="about.html" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition duration-300 font-medium" onclick="toggleMenu()">About</a>
+            <a href="events.html" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition duration-300 font-medium" onclick="toggleMenu()">Events</a>
+            <a href="index.html" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition duration-300 font-medium" onclick="toggleMenu()">Showcase</a>
+            <a href="honor-board.html" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition duration-300 font-medium" onclick="toggleMenu()">Honor Board</a>
+            <a href="gallery.html" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition duration-300 font-medium" onclick="toggleMenu()">Gallery</a>
+            <a href="#contact" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition duration-300 font-medium" onclick="toggleMenu()">Join Us</a>
+            <a href="verification.html" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition duration-300 font-medium" onclick="toggleMenu()">Verify Certificate</a>
+        </div>
+    </header>
+  
+<div class="bg-ku-blue text-white py-10 text-center">
   <h1 class="text-4xl font-extrabold">Upcoming Literary Events</h1>
-</header>
+</div>
 
 <main class="py-16">
   <div id="event-list" class="max-w-6xl mx-auto px-4 space-y-6">
@@ -91,3 +128,4 @@ fetch('https://api.github.com/repos/EkramulKU/kuws-website/contents/content/even
 
 </body>
 </html>
+
