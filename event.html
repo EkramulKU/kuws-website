@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Event Details | KU Writers' Society</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: { sans: ['Inter', 'sans-serif'] },
+      colors: {
+        'ku-blue': '#1a3a60',
+        'ku-gold': '#ffb703',
+      }
+    }
+  }
+}
+</script>
+</head>
+
+<body class="bg-ku-light text-gray-800">
+
+<main class="max-w-4xl mx-auto px-4 py-16">
+  <div id="event-detail" class="bg-white rounded-xl shadow p-8">
+    Loading...
+  </div>
+</main>
+
+<script>
+const slug = new URLSearchParams(window.location.search).get('slug');
+
+fetch(`https://raw.githubusercontent.com/EkramulKU/kuws-website/main/content/events/${slug}.md`)
+.then(r => r.text())
+.then(text => {
+
+  const title = text.match(/title:\s*(.*)/)?.[1] || '';
+  const location = text.match(/location:\s*(.*)/)?.[1] || '';
+  const start = text.match(/start_date:\s*(.*)/)?.[1] || '';
+  const end = text.match(/end_date:\s*(.*)/)?.[1] || '';
+  const cover = text.match(/cover:\s*(.*)/)?.[1] || '';
+  const body = text.split('---').pop();
+
+  document.getElementById('event-detail').innerHTML = `
+    <h1 class="text-3xl font-extrabold text-ku-blue mb-4">${title}</h1>
+    ${cover ? `<img src="${cover}" class="w-full h-64 object-cover rounded-lg mb-6">` : ''}
+    <p class="text-sm text-gray-500 mb-2">📍 ${location}</p>
+    <p class="text-sm text-gray-500 mb-6">📅 ${start} – ${end}</p>
+    <div class="prose max-w-none">${marked.parse(body)}</div>
+  `;
+});
+</script>
+
+</body>
+</html>
