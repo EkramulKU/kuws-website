@@ -520,31 +520,8 @@ Participants will be required to regularly read the editorials published in two 
         });
     }
 
-    </script>
 
-<script>
-fetch('https://api.github.com/repos/EkramulKU/kuws-website/contents/content/notices')
-  .then(res => res.json())
-  .then(files => {
-    const list = document.getElementById('notice-list');
-    files.forEach(file => {
-      fetch(file.download_url)
-        .then(r => r.text())
-        .then(text => {
-          const titleMatch = text.match(/title:\s*(.*)/);
-          if (titleMatch) {
-            const li = document.createElement('li');
-            li.textContent = titleMatch[1];
-            list.appendChild(li);
-          }
-        });
-    });
-  });
-
-
-
-
-    
+        <!-----script for notice add>
 fetch('https://api.github.com/repos/EkramulKU/kuws-website/contents/content/notices?ref=main', {
   cache: "no-store"
 })
@@ -552,35 +529,53 @@ fetch('https://api.github.com/repos/EkramulKU/kuws-website/contents/content/noti
 .then(files => {
   const list = document.getElementById('notice-list');
   list.innerHTML = '';
+  const now = new Date();
+  const notices = [];
 
-  // নতুন notice আগে দেখানোর জন্য reverse
   files
-    .filter(file => file.name.endsWith('.md'))
-    .reverse()
+    .filter(f => f.name.endsWith('.md'))
     .forEach(file => {
       fetch(file.download_url, { cache: "no-store" })
         .then(r => r.text())
         .then(text => {
-          const title = text.match(/title:\s*(.*)/)?.[1] || '';
+
+          if (!/show_on_home:\s*true/.test(text)) return;
+
+          const title = text.match(/title:\s*(.*)/)?.[1];
+          if (!title) return;
+
           const slug = file.name.replace('.md', '');
+          const pinned = /pinned:\s*true/.test(text);
+          const urgent = /urgent:\s*true/.test(text);
 
-          const span = document.createElement('span');
-          span.className = "mr-10 whitespace-nowrap";
-          span.innerHTML = `🔔 ${title}`;
+          const expiryMatch = text.match(/expiry:\s*(.*)/);
+          if (expiryMatch && new Date(expiryMatch[1]) < now) return;
 
-          list.appendChild(span);
+          notices.push({ title, slug, pinned, urgent });
         });
     });
+
+  setTimeout(() => {
+    notices
+      .sort((a, b) => b.pinned - a.pinned)
+      .forEach(n => {
+        const a = document.createElement('a');
+        a.href = `/notices#${n.slug}`;
+        a.className = "mx-6 whitespace-nowrap font-semibold hover:underline";
+        a.innerHTML = `${n.urgent ? '🔴 ' : ''}${n.title}`;
+        list.appendChild(a);
+      });
+  }, 800);
 });
-
-
-
-
+        <!-----script for notice add close>
+        
+    </script>
 </script>
 
     
 </body>
 </html>
+
 
 
 
