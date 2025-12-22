@@ -64,6 +64,16 @@
   display: inline-block;
   animation: marquee 25s linear infinite;
 }
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: inline-block;
+  min-width: 200%;
+  animation: marquee 20s linear infinite;
+}
 
     </style>
 </head>
@@ -533,21 +543,20 @@ fetch('https://api.github.com/repos/EkramulKU/kuws-website/contents/content/noti
   .then(res => res.json())
   .then(files => {
 
-    // নতুন notice আগে দেখানোর জন্য sort
-    files.sort((a, b) => new Date(b.name) - new Date(a.name));
-
+    // GitHub API default order newest → oldest
     const marquee = document.getElementById('notice-marquee');
+
+    let combinedText = '';
 
     files.forEach(file => {
       fetch(file.download_url)
         .then(r => r.text())
         .then(text => {
-          const titleMatch = text.match(/title:\s*(.*)/);
-          if (titleMatch) {
-            const span = document.createElement('span');
-            span.className = "mr-12";
-            span.textContent = "• " + titleMatch[1];
-            marquee.appendChild(span);
+          const title = text.match(/title:\s*(.*)/)?.[1];
+          if (title) {
+            combinedText += ` • ${title} `;
+            marquee.textContent = combinedText + combinedText; 
+            // duplicate for smooth loop
           }
         });
     });
@@ -555,11 +564,13 @@ fetch('https://api.github.com/repos/EkramulKU/kuws-website/contents/content/noti
 </script>
 
 
+
 </script>
 
     
 </body>
 </html>
+
 
 
 
