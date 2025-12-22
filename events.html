@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Events | KU Writers' Society</title>
+<title>Events | KUWS </title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 
@@ -75,30 +75,42 @@ tailwind.config = {
   </div>
 </main>
 
+<!-- Contact Section -->
+<section id="contact" class="py-16 md:py-24 bg-ku-light">
+  <div class="max-w-4xl mx-auto px-4 text-center">
+    <h2 class="text-3xl font-extrabold text-ku-blue mb-4">Ready to Start Writing?</h2>
+    <p class="text-lg text-gray-600 mb-8">
+      We welcome writers and readers of all departments and skill levels.
+    </p>
+  </div>
+</section>
+
 <!-- Footer -->
 <footer class="bg-ku-blue text-white py-10">
   <div class="text-center text-sm text-gray-300">
-    © <span id="year"></span> Khulna University Writers' Society
+    © <span id="current-year"></span> Khulna University Writers' Society
   </div>
 </footer>
 
 <!-- Go Up Button -->
-<a href="#top" class="fixed bottom-6 right-6 p-3 bg-ku-blue text-white rounded-full shadow-lg hover:bg-ku-blue/80 z-50">
+<a href="#top"
+   class="fixed bottom-6 right-6 p-3 bg-ku-blue text-white rounded-full shadow-lg hover:bg-ku-blue/80 z-50">
   ↑
 </a>
 
 <script>
 /* year */
-document.getElementById('year').textContent = new Date().getFullYear();
+document.getElementById('current-year').textContent = new Date().getFullYear();
 
 /* mobile menu */
-const btn = document.getElementById('mobile-menu-button');
-const menu = document.getElementById('mobile-menu');
-btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+function toggleMenu() {
+  document.getElementById('mobile-menu').classList.toggle('hidden');
+}
+document.getElementById('mobile-menu-button').addEventListener('click', toggleMenu);
 
 /* fetch events */
 fetch('https://api.github.com/repos/EkramulKU/kuws-website/contents/content/events?ref=main', {
-  cache: 'no-store'
+  cache: "no-store"
 })
 .then(res => res.json())
 .then(files => {
@@ -123,7 +135,8 @@ fetch('https://api.github.com/repos/EkramulKU/kuws-website/contents/content/even
           const dateObj = new Date(start);
 
           const card = document.createElement('div');
-          card.className = "md:flex bg-white rounded-xl shadow-lg p-6 border-l-8 border-ku-gold";
+          card.className =
+            "md:flex bg-white rounded-xl shadow-lg p-6 border-l-8 border-ku-gold hover:shadow-xl";
 
           card.innerHTML = `
             <div class="md:w-48 text-center mb-4 md:mb-0">
@@ -151,4 +164,3 @@ fetch('https://api.github.com/repos/EkramulKU/kuws-website/contents/content/even
 
 </body>
 </html>
-
