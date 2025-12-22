@@ -177,7 +177,7 @@ tailwind.config = {
 
 
 <script>
-document.getElementById('year').textContent = new Date().getFullYear();
+document.getElementById('current-year').textContent = new Date().getFullYear();
 
 fetch('https://api.github.com/repos/EkramulKU/kuws-website/contents/content/writings?ref=main',{cache:'no-store'})
 .then(res=>res.json())
@@ -189,7 +189,11 @@ fetch('https://api.github.com/repos/EkramulKU/kuws-website/contents/content/writ
   list.innerHTML='';
   let count=0;
 
-  files.filter(f=>f.name.endsWith('.md')).reverse().forEach((file,i)=>{
+files
+  .filter(f => f.type === "file" && f.name.endsWith('.md →'))
+  .reverse()
+  .forEach((file,i)=>{
+
     fetch(file.download_url)
     .then(r=>r.text())
     .then(text=>{
@@ -223,4 +227,5 @@ fetch('https://api.github.com/repos/EkramulKU/kuws-website/contents/content/writ
 
 </body>
 </html>
+
 
