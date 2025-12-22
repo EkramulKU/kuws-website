@@ -34,8 +34,13 @@ collections:
     slug: "{{slug}}"
     fields:
       - { label: "Event Title", name: "title", widget: "string" }
-      - { label: "Event Date", name: "date", widget: "datetime" }
-      - { label: "Details", name: "body", widget: "markdown" }
+      - { label: "Short Description", name: "short_description", widget: "text" }
+      - { label: "Event Location", name: "location", widget: "string" }
+      - { label: "Start Date & Time", name: "start_date", widget: "datetime" }
+      - { label: "End Date & Time", name: "end_date", widget: "datetime" }
+      - { label: "Cover Photo", name: "cover", widget: "image" }
+      - { label: "Detailed Description", name: "body", widget: "markdown" }
+
 
   - name: "honorboard"
     label: "Honor Board"
