@@ -1,177 +1,220 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Beyond the Horizon | Khulna University Writers' Society</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Writing | KU Writers' Society</title>
 
-  <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="Beyond the Horizon | Khulna University Writers' Society">
-  <meta property="og:description" content="A reflective feature article exploring how young writers at Khulna University are redefining creativity and purpose through words.">
-  <meta property="og:image" content="https://yourwebsite.com/images/sample.jpg">
-  <meta property="og:url" content="https://yourwebsite.com/events.html">
-  <meta property="og:type" content="article">
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Twitter Card Meta -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Beyond the Horizon | Khulna University Writers' Society">
-  <meta name="twitter:description" content="A reflective feature article exploring how young writers at Khulna University are redefining creativity and purpose through words.">
-  <meta name="twitter:image" content="https://yourwebsite.com/images/sample.jpg">
+<!-- Markdown parser -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
+<!-- SolaimanLipi -->
+<link href="https://fonts.maateen.me/solaiman-lipi/font.css" rel="stylesheet">
 
-  <!-- Tailwind Config -->
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-          },
-          colors: {
-            'ku-blue': '#1a3a60',
-            'ku-gold': '#ffb703',
-            'ku-light': '#f0f4f8',
-          }
-        }
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        bangla: ['SolaimanLipi', 'sans-serif'],
+      },
+      colors: {
+        'ku-blue': '#1a3a60',
+        'ku-gold': '#ffb703',
+        'ku-light': '#f0f4f8',
       }
     }
-  </script>
-
-  <style>
-    html { scroll-behavior: smooth; font-family: 'Inter', sans-serif; }
-    body::-webkit-scrollbar { width: 8px; }
-    body::-webkit-scrollbar-thumb { background-color: #ffb703; border-radius: 4px; }
-    body::-webkit-scrollbar-track { background-color: #1a3a60; }
-  </style>
+  }
+}
+</script>
 </head>
 
 <body class="bg-ku-light text-gray-800">
 
-  <!-- Header & Navigation -->
-  <header class="bg-ku-blue shadow-lg sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-20">
-        <a href="index.html#home" class="flex items-center space-x-3">
-          <img src="images/logo.jpg" alt="KU Writers' Society Logo" class="h-10 w-10 rounded-full object-cover">
-          <span class="text-2xl font-bold text-white tracking-wide">KU Writers' Society</span>
-        </a>
-        <nav class="hidden md:flex space-x-8">
-          <a href="index.html#home" class="text-white hover:text-ku-gold transition duration-300 font-medium">Home</a>
-          <a href="index.html#about" class="text-white hover:text-ku-gold transition duration-300 font-medium">About</a>
-          <a href="index.html#events" class="text-white hover:text-ku-gold transition duration-300 font-medium">Events</a>
-          <a href="index.html#showcase" class="text-white hover:text-ku-gold transition duration-300 font-medium">Showcase</a>
-          <a href="index.html#honor-board" class="text-white hover:text-ku-gold transition duration-300 font-medium">Honor Board</a>
-          <a href="index.html#gallery" class="text-white hover:text-ku-gold transition duration-300 font-medium">Gallery</a>
-          <a href="index.html#contact" class="text-white hover:text-ku-gold transition duration-300 font-medium">Join Us</a>
-          <a href="verification.html" class="text-white hover:text-ku-gold transition duration-300 font-medium">Verify Certificate</a>
-        </nav>
-        <button id="mobile-menu-button" class="md:hidden text-white hover:text-ku-gold focus:outline-none">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-        </button>
-      </div>
-    </div>
+<!-- ================= HEADER ================= -->
+<header class="bg-ku-blue shadow-lg sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 h-20 flex justify-between items-center">
+    <a href="index.html" class="flex items-center space-x-3">
+      <img src="images/logo.jpg" class="h-10 w-10 rounded-full">
+      <span class="text-2xl font-bold text-white">KU Writers' Society</span>
+    </a>
+    <nav class="hidden md:flex space-x-6 text-white font-medium">
+      <<a href="home.html" class="text-white hover:text-ku-gold transition duration-300 font-medium">Home</a>
+                    <a href="about.html" class="text-white hover:text-ku-gold transition duration-300 font-medium">About</a>
+                    <a href="events.html" class="text-white hover:text-ku-gold transition duration-300 font-medium">Events</a>
+                    <a href="index.html" class="text-white hover:text-ku-gold transition duration-300 font-medium">Showcase</a>
+                    <a href="honor-board.html" class="text-white hover:text-ku-gold transition duration-300 font-medium">Honor Board</a>
+                    <a href="gallery.html" class="text-white hover:text-ku-gold transition duration-300 font-medium">Gallery</a>
+                    <a href="#contact" class="text-white hover:text-ku-gold transition duration-300 font-medium">Join Us</a>
+                    <a href="verification.html" class="text-white hover:text-ku-gold transition duration-300 font-medium">Verify Certificate</a>
+                </nav>
 
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden md:hidden bg-ku-blue pb-4 border-t border-ku-gold/30">
-      <a href="index.html#home" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition font-medium" onclick="toggleMenu()">Home</a>
-      <a href="index.html#about" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition font-medium" onclick="toggleMenu()">About</a>
-      <a href="index.html#events" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition font-medium" onclick="toggleMenu()">Events</a>
-      <a href="index.html#showcase" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition font-medium" onclick="toggleMenu()">Showcase</a>
-      <a href="index.html#honor-board" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition font-medium" onclick="toggleMenu()">Honor Board</a>
-      <a href="index.html#gallery" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition font-medium" onclick="toggleMenu()">Gallery</a>
-      <a href="index.html#contact" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition font-medium" onclick="toggleMenu()">Join Us</a>
-      <a href="verification.html" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition font-medium" onclick="toggleMenu()">Verify Certificate</a>
-    </div>
-  </header>
+                <!-- Mobile Menu Button --><button id="mobile-menu-button" class="md:hidden text-white hover:text-ku-gold focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+        </div>
 
-  <main>
+        <!-- Mobile Menu (Hidden by default) --><div id="mobile-menu" class="hidden md:hidden bg-ku-blue pb-4 border-t border-ku-gold/30">
+            <a href="home.html" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition duration-300 font-medium" onclick="toggleMenu()">Home</a>
+            <a href="about.html" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition duration-300 font-medium" onclick="toggleMenu()">About</a>
+            <a href="events.html" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition duration-300 font-medium" onclick="toggleMenu()">Events</a>
+            <a href="index.html" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition duration-300 font-medium" onclick="toggleMenu()">Showcase</a>
+            <a href="honor-board.html" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition duration-300 font-medium" onclick="toggleMenu()">Honor Board</a>
+            <a href="gallery.html" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition duration-300 font-medium" onclick="toggleMenu()">Gallery</a>
+            <a href="#contact" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition duration-300 font-medium" onclick="toggleMenu()">Join Us</a>
+            <a href="verification.html" class="block px-4 py-2 text-white hover:bg-ku-blue/70 transition duration-300 font-medium" onclick="toggleMenu()">Verify Certificate</a>
+        </div>
+    </header>
 
-    <!-- ✍️ Writing Section -->
-    <section id="writing" class="py-16 md:py-24 bg-ku-light">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 bg-white rounded-2xl shadow-lg p-8 md:p-12 border-l-8 border-ku-gold">
+<!-- ================= BACK BUTTON ================= -->
+<a href="index.html"
+   class="fixed top-24 left-4 z-40 bg-ku-blue text-white px-4 py-2 rounded-full shadow hover:bg-ku-blue/80 transition">
+  ← সব লেখা
+</a>
+
+<!-- ================= MAIN CONTENT ================= -->
+<main class="py-16">
+  <div id="lekha-container"
+       class="max-w-4xl mx-auto bg-white rounded-2xl shadow p-8 md:p-12 font-bangla">
+    লোড হচ্ছে...
+  </div>
+        <!-- Contact --><section id="contact" class="py-16 md:py-24 bg-ku-light">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-ku-blue mb-4">Ready to Start Writing?</h2>
+                <p class="text-lg text-gray-600 mb-8">
+                    We welcome writers and readers of all departments and skill levels. Your voice matters here.
+                </p>
+
+                <div class="md:flex justify-center space-y-4 md:space-y-0 md:space-x-6">
+                    <a href="https://forms.gle/1ZHep4fKWjWkJ5z39" class="inline-flex items-center justify-center w-full md:w-auto bg-ku-blue text-white hover:bg-ku-blue/80 transition duration-300 font-semibold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 active:scale-95">
+                        <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        Be A Member
+                    </a>
+                    <a href="https://www.facebook.com/KUWritersSociety/" target="_blank" class="inline-flex items-center justify-center w-full md:w-auto bg-ku-gold text-ku-blue hover:bg-ku-gold/80 transition duration-300 font-semibold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 active:scale-95">
+                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-3 7h-2.5v-1.5c0-.827.673-1.5 1.5-1.5h1v-2h-2c-2.206 0-3 1.05-3 2.5v1.5h-2v2h2v7h3v-7h3l.5-2z"/></svg>
+                        Follow on Facebook
+                    </a>
+                    <a href="https://www.facebook.com/groups/kuws2024" target="_blank" class="inline-flex items-center justify-center w-full md:w-auto bg-ku-gold text-ku-blue hover:bg-ku-gold/80 transition duration-300 font-semibold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 active:scale-95">
+                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-3 7h-2.5v-1.5c0-.827.673-1.5 1.5-1.5h1v-2h-2c-2.206 0-3 1.05-3 2.5v1.5h-2v2h2v7h3v-7h3l.5-2z"/></svg>
+                        Join Group
+                    </a>
+                </div>
+
+                <p class="mt-8 text-sm text-gray-500">
+                    Program Schedules are shared in our official group.
+                </p>
+            </div>
+        </section>
+    </main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="bg-ku-blue text-white py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-8">
+            
+            <!-- Logo/Name --><div>
+                <span class="text-xl font-bold text-ku-gold">Khulna University Writers' Society</span>
+                <p class="mt-2 text-sm text-gray-300">
+                    Powered by the passion of Khulna University students.
+                </p>
+            </div>
+
+            <!-- Quick Links --><div>
+                <h5 class="text-lg font-semibold mb-3">Quick Links</h5>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="ourstory.html" class="hover:text-ku-gold transition duration-200">Our Story</a></li>
+                    <li><a href="events.html" class="hover:text-ku-gold transition duration-200">Upcoming Activities</a></li>
+                    <li><a href="index.html" class="hover:text-ku-gold transition duration-200">Read Member Work</a></li>
+                    <li><a href="honor-board.html" class="hover:text-ku-gold transition duration-200">Honor Board</a></li>
+                    <li><a href="gallery.html" class="hover:text-ku-gold transition duration-200">Gallery</a></li>
+                </ul>
+            </div>
+
+            <!-- Resources --><div>
+                <h5 class="text-lg font-semibold mb-3">Resources</h5>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="logo.html" class="hover:text-ku-gold transition duration-200">KU related Logo</a></li>
+                    <li><a href="https://dsa.ku.ac.bd/clubs" class="hover:text-ku-gold transition duration-200">KU Club List</a></li>
+                    <li><a href="https://ku.ac.bd" class="hover:text-ku-gold transition duration-200">KU Official Site</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Info --><div>
+                <h5 class="text-lg font-semibold mb-3">Get In Touch</h5>
+                <p class="text-sm">
+                    <span class="block">Email: kuwriterssociety@ku.ac.bd</span>
+                    <span class="block mt-2">Khulna University, Khulna-9208</span>
+                </p>
+            </div>
+        </div>
         
-        <h1 class="text-3xl md:text-4xl font-extrabold text-ku-blue mb-4">Beyond the Horizon</h1>
-
-        <div class="flex flex-wrap justify-between text-sm text-gray-500 mb-6">
-          <span>By <span class="font-semibold text-ku-blue">Farhana Akter</span></span>
-          <span>October 26, 2025</span>
+        <div class="mt-10 pt-6 border-t border-ku-gold/30 text-center text-sm text-gray-400">
+            &copy; <span id="current-year"></span> Khulna University Writers' Society. All rights reserved.
         </div>
+    </footer>
 
-        <img src="images/sample.jpg" alt="Beyond the Horizon" class="rounded-xl shadow-md w-full h-72 object-cover mb-8">
+<!-- Go Up Button -->
+<a href="#top"
+   class="fixed bottom-6 right-6 p-3 bg-ku-blue text-white rounded-full shadow-lg hover:bg-ku-blue/80 z-50">
+  ↑
+</a>
 
-        <div class="text-gray-700 leading-relaxed space-y-4 text-justify">
-          <p>The world of words is ever-changing, and yet, its essence remains rooted in the same desire — to connect minds and hearts across time and space. At Khulna University, young writers are breaking beyond traditional boundaries, redefining what it means to be a storyteller in the digital age.</p>
 
-          <p>“Beyond the Horizon” explores this evolution of literary expression among students who find power not only in writing but in reflection. From short stories and poems to campus journalism, each form carries the pulse of a generation seeking purpose, clarity, and truth.</p>
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
 
-          <p>The Writers’ Society, in many ways, serves as the bridge between passion and publication. With workshops, peer mentorship, and collaborative critique, it offers a rare platform for emerging voices to flourish — nurturing not just skill, but a sense of belonging.</p>
+/* get slug */
+const slug = new URLSearchParams(window.location.search).get('slug');
+if(!slug){
+  document.getElementById('lekha-container').innerHTML = 'লেখা পাওয়া যায়নি।';
+}
 
-          <p>As digital platforms amplify young voices, the challenge now lies not in reaching an audience, but in resonating with them. And in this challenge, perhaps, lies the true beauty of writing — the endless pursuit of meaning beyond the visible horizon.</p>
-        </div>
+/* fetch writing */
+fetch(`https://raw.githubusercontent.com/EkramulKU/kuws-website/main/content/writings/${slug}.md`,
+      { cache:'no-store' })
+.then(res => res.text())
+.then(text => {
 
-        <div class="mt-10 flex flex-wrap gap-4 items-center">
-          <span class="text-gray-600 font-semibold">Share this:</span>
-          <a href="https://www.facebook.com/sharer/sharer.php?u=https://yourwebsite.com/events.html" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded-full shadow hover:bg-blue-700 transition">Facebook</a>
-          <a href="https://twitter.com/intent/tweet?url=https://yourwebsite.com/events.html&text=Beyond%20the%20Horizon%20-%20Khulna%20University%20Writers'%20Society" target="_blank" class="bg-sky-500 text-white px-4 py-2 rounded-full shadow hover:bg-sky-600 transition">X (Twitter)</a>
-          <a href="https://api.whatsapp.com/send?text=Beyond%20the%20Horizon%20-%20Khulna%20University%20Writers'%20Society%20https://yourwebsite.com/events.html" target="_blank" class="bg-green-500 text-white px-4 py-2 rounded-full shadow hover:bg-green-600 transition">WhatsApp</a>
-        </div>
-      </div>
-    </section>
+  const get = k => text.match(new RegExp(k + ':\\s*(.*)'))?.[1] || '';
+  const body = text.split('---').pop().trim();
 
-  </main>
+  document.getElementById('lekha-container').innerHTML = `
+    <p class="text-ku-gold font-semibold mb-2">${get('type')}</p>
 
-  <!-- Footer -->
-  <footer class="bg-ku-blue text-white py-10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-8">
-      <div>
-        <span class="text-xl font-bold text-ku-gold">Khulna University Writers' Society</span>
-        <p class="mt-2 text-sm text-gray-300">Powered by the passion of Khulna University students.</p>
-      </div>
+    <h1 class="text-3xl md:text-4xl font-extrabold text-ku-blue mb-4">
+      ${get('title')}
+    </h1>
 
-      <div>
-        <h5 class="text-lg font-semibold mb-3">Quick Links</h5>
-        <ul class="space-y-2 text-sm">
-          <li><a href="ourstory.html" class="hover:text-ku-gold transition">Our Story</a></li>
-          <li><a href="events.html" class="hover:text-ku-gold transition">Upcoming Activities</a></li>
-          <li><a href="headlines.html" class="hover:text-ku-gold transition">Read Member Work</a></li>
-          <li><a href="honorboard.html" class="hover:text-ku-gold transition">Honor Board</a></li>
-          <li><a href="index.html#writer-assistant" class="hover:text-ku-gold transition">Writer's Muse</a></li>
-          <li><a href="verification.html" class="hover:text-ku-gold transition">Certificate Verification</a></li>
-        </ul>
-      </div>
+    <p class="text-sm text-gray-600 mb-1">
+      <strong>${get('writer')}</strong>
+    </p>
 
-      <div>
-        <h5 class="text-lg font-semibold mb-3">Resources</h5>
-        <ul class="space-y-2 text-sm">
-          <li><a href="logo.html" class="hover:text-ku-gold transition">KU related Logo</a></li>
-          <li><a href="https://dsa.ku.ac.bd/clubs" class="hover:text-ku-gold transition">KU Club List</a></li>
-          <li><a href="https://ku.ac.bd" class="hover:text-ku-gold transition">KU Official Site</a></li>
-        </ul>
-      </div>
+    <p class="text-sm text-gray-500 mb-2">
+      ${get('intro')}
+    </p>
 
-      <div>
-        <h5 class="text-lg font-semibold mb-3">Get In Touch</h5>
-        <p class="text-sm">
-          <span class="block">Email: kuwriterssociety@gmail.com</span>
-          <span class="block mt-2">Khulna University, Khulna-9208</span>
-        </p>
-      </div>
+    <p class="text-sm text-gray-500 mb-6">
+      ${get('date')}
+    </p>
+
+    ${get('image') ? `
+      <img src="${get('image')}"
+           class="w-full rounded-xl shadow mb-8">
+    ` : ''}
+
+    <div class="leading-loose text-justify text-[18px] mb-10">
+      ${marked.parse(body)}
     </div>
 
-    <div class="mt-10 pt-6 border-t border-ku-gold/30 text-center text-sm text-gray-400">
-      &copy; <span id="current-year"></span> Khulna University Writers' Society. All rights reserved.
-    </div>
-  </footer>
-
-  <script>
-    document.getElementById('current-year').textContent = new Date().getFullYear();
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-    function toggleMenu() { mobileMenu.classList.toggle('hidden'); }
-    mobileMenuButton.addEventListener('click', toggleMenu);
-  </script>
+    <p class="text-right font-semibold">
+      — ${get('uploader')}
+    </p>
+  `;
+});
+</script>
 
 </body>
 </html>
