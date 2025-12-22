@@ -174,42 +174,43 @@ tailwind.config = {
 
 
 <script>
-document.getElementById('year').textContent = new Date().getFullYear();
+document.getElementById('current-year').textContent = new Date().getFullYear();
 
 /* get slug */
 const slug = new URLSearchParams(window.location.search).get('slug');
-if(!slug){
+if (!slug) {
   document.getElementById('lekha-container').innerHTML = 'লেখা পাওয়া যায়নি।';
 }
 
 /* fetch writing */
 fetch(`https://raw.githubusercontent.com/EkramulKU/kuws-website/main/content/writings/${slug}.md`,
-      { cache:'no-store' })
+      { cache: 'no-store' })
 .then(res => res.text())
 .then(text => {
 
   function get(key) {
-  const match = text.match(new RegExp(key + ':\\s*(.*)'));
-  return match ? match[1].trim() : '';
-}
-// ===== SET OPEN GRAPH META =====
-document.querySelector('meta[property="og:title"]')
-  .setAttribute('content', get('og_title') || get('title'));
+    const match = text.match(new RegExp(key + ':\\s*(.*)'));
+    return match ? match[1].trim() : '';
+  }
 
-document.querySelector('meta[property="og:description"]')
-  .setAttribute('content', get('og_description'));
-
-document.querySelector('meta[property="og:image"]')
-  .setAttribute('content', get('og_image'));
-
-document.querySelector('meta[property="og:url"]')
-  .setAttribute('content', window.location.href);
-
-document.title = (get('og_title') || get('title')) + ' | KU Writers\' Society';
-
-  const get = k => text.match(new RegExp(k + ':\\s*(.*)'))?.[1] || '';
   const body = text.split('---').pop().trim();
 
+  /* ===== SET OPEN GRAPH META ===== */
+  document.querySelector('meta[property="og:title"]')
+    .setAttribute('content', get('og_title') || get('title'));
+
+  document.querySelector('meta[property="og:description"]')
+    .setAttribute('content', get('og_description'));
+
+  document.querySelector('meta[property="og:image"]')
+    .setAttribute('content', get('og_image'));
+
+  document.querySelector('meta[property="og:url"]')
+    .setAttribute('content', window.location.href);
+
+  document.title = (get('og_title') || get('title')) + ' | KU Writers\' Society';
+
+  /* ===== RENDER BODY ===== */
   document.getElementById('lekha-container').innerHTML = `
     <p class="text-ku-gold font-semibold mb-2">${get('type')}</p>
 
@@ -245,7 +246,9 @@ document.title = (get('og_title') || get('title')) + ' | KU Writers\' Society';
 });
 </script>
 
+
 </body>
 </html>
+
 
 
