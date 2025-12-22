@@ -2,68 +2,118 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>All Notices | KU Writers' Society</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Notices | Khulna University Writers' Society</title>
+
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+          colors: {
+            'ku-blue': '#1a3a60',
+            'ku-gold': '#ffb703',
+            'ku-light': '#f0f4f8',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; font-family: 'Inter', sans-serif; }
+    body::-webkit-scrollbar { width: 8px; }
+    body::-webkit-scrollbar-thumb { background-color: #ffb703; border-radius: 4px; }
+    body::-webkit-scrollbar-track { background-color: #1a3a60; }
+  </style>
 </head>
 
 <body class="bg-ku-light text-gray-800">
 
-  <!-- HEADER -->
-  <div class="bg-ku-blue text-white py-6 text-center">
-    <h1 class="text-3xl font-bold">📢 All Notices</h1>
-    <p class="text-sm text-ku-gold mt-1">
-      Khulna University Writers' Society
-    </p>
+<!-- Header -->
+<header class="bg-ku-blue shadow-lg sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex justify-between items-center">
+    <a href="index.html#home" class="flex items-center space-x-3">
+      <img src="images/logo.jpg" class="h-10 w-10 rounded-full">
+      <span class="text-2xl font-bold text-white">KU Writers' Society</span>
+    </a>
+    <nav class="hidden md:flex space-x-8 text-white font-medium">
+      <a href="index.html#home" class="hover:text-ku-gold">Home</a>
+      <a href="index.html#events" class="hover:text-ku-gold">Events</a>
+      <a href="index.html#showcase" class="hover:text-ku-gold">Showcase</a>
+      <a href="index.html#gallery" class="hover:text-ku-gold">Gallery</a>
+    </nav>
   </div>
+</header>
 
-  <!-- NOTICES LIST -->
-  <main class="max-w-4xl mx-auto px-4 py-8">
-    <div id="all-notices" class="space-y-6">
-      <p class="text-gray-500">Loading notices...</p>
+<main>
+
+<!-- Notices Section -->
+<section class="py-16 bg-ku-light">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="bg-white rounded-2xl shadow-lg p-8 md:p-12 border-l-8 border-ku-gold">
+      <h1 class="text-3xl md:text-4xl font-extrabold text-ku-blue mb-8">
+        📢 All Notices
+      </h1>
+
+      <!-- Notices will load here -->
+      <div id="all-notices" class="space-y-6">
+        <p class="text-gray-500">Loading notices...</p>
+      </div>
     </div>
-  </main>
 
-  <!-- FOOTER -->
-  <footer class="text-center text-sm text-gray-500 pb-6">
-    © <span id="year"></span> KU Writers' Society
-  </footer>
+  </div>
+</section>
 
-  <!-- SCRIPT -->
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+</main>
 
-    fetch('https://api.github.com/repos/EkramulKU/kuws-website/contents/content/notices')
-      .then(res => res.json())
-      .then(files => {
+<!-- Footer -->
+<footer class="bg-ku-blue text-white py-10 mt-20">
+  <div class="text-center text-sm text-gray-300">
+    &copy; <span id="current-year"></span> Khulna University Writers' Society
+  </div>
+</footer>
 
-        const container = document.getElementById('all-notices');
-        container.innerHTML = '';
+<script>
+document.getElementById('current-year').textContent = new Date().getFullYear();
 
-        // GitHub API returns newest first
-        files.forEach(file => {
-          fetch(file.download_url)
-            .then(r => r.text())
-            .then(text => {
+fetch('https://api.github.com/repos/EkramulKU/kuws-website/contents/content/notices?ref=main', {
+  cache: "no-store"
+})
+.then(res => res.json())
+.then(files => {
+  const container = document.getElementById('all-notices');
+  container.innerHTML = '';
 
-              const title = text.match(/title:\s*(.*)/)?.[1];
-              const body = text.split('---').pop();
+  files
+    .filter(file => file.name.endsWith('.md'))
+    .reverse() // 👉 newest first
+    .forEach(file => {
+      fetch(file.download_url, { cache: "no-store" })
+        .then(r => r.text())
+        .then(text => {
+          const title = text.match(/title:\s*(.*)/)?.[1] || 'Untitled';
+          const date = text.match(/date:\s*(.*)/)?.[1] || '';
+          const body = text.split('---').pop().trim();
 
-              if (title) {
-                const div = document.createElement('div');
-                div.className = "bg-white p-6 rounded-xl shadow border-l-4 border-ku-gold";
+          const card = document.createElement('div');
+          card.className = "border rounded-xl p-6 hover:shadow-lg transition";
 
-                div.innerHTML = `
-                  <h3 class="text-xl font-bold text-ku-blue mb-2">${title}</h3>
-                  <div class="text-gray-700 text-sm leading-relaxed">${body}</div>
-                `;
+          card.innerHTML = `
+            <h2 class="text-xl font-bold text-ku-blue mb-1">${title}</h2>
+            <p class="text-sm text-gray-500 mb-3">${date}</p>
+            <div class="text-gray-700 leading-relaxed">${body}</div>
+          `;
 
-                container.appendChild(div);
-              }
-            });
+          container.appendChild(card);
         });
-      });
-  </script>
+    });
+});
+</script>
 
 </body>
 </html>
