@@ -190,7 +190,7 @@ fetch('https://api.github.com/repos/EkramulKU/kuws-website/contents/content/writ
   let count=0;
 
 files
-  .filter(f => f.type === "file" && f.name.endsWith('.md →'))
+  .filter(f => f.type === "file" && f.name.endsWith('.md'))
   .reverse()
   .forEach((file,i)=>{
 
@@ -227,5 +227,6 @@ files
 
 </body>
 </html>
+
 
 
