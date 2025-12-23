@@ -13,6 +13,20 @@ module.exports = function (eleventyConfig) {
      Writings Collection (Lekha)
      =============================== */
 
+eleventyConfig.addFilter("filterByType", function (collection, type) {
+  return collection.filter(item => item.data.type === type);
+});
+
+eleventyConfig.addFilter("readableDate", dateObj => {
+  return new Date(dateObj).toLocaleDateString("bn-BD", {
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  });
+});
+
+
+  
   eleventyConfig.addCollection("writings", function (collectionApi) {
     return collectionApi
       .getFilteredByGlob("src/content/writings/*.md")
