@@ -254,38 +254,38 @@ function renderCategories() {
       .forEach(item => {
         const get = v => item.text.match(new RegExp(v + ':\\s*(.*)'))?.[1] || '';
 
-        const card = document.createElement('div');
-        card.className = "bg-white rounded-xl shadow p-5";
+const link = `lekha.html?slug=${item.file.name.replace('.md','')}`;
 
-        card.innerHTML = `
-<a href="lekha.html?slug=${item.file.name.replace('.md','')}"
-   class="block">
-  <h3 class="text-lg font-bold text-ku-blue mb-1 hover:underline">
+const card = document.createElement('a');
+card.href = link;
+card.className = `
+  block bg-white rounded-xl shadow p-5
+  hover:shadow-lg transition
+`;
+
+card.innerHTML = `
+  <h3 class="text-lg font-bold text-ku-blue mb-1">
     ${get('title')}
   </h3>
-</a>
 
-<p class="text-sm text-gray-600 mb-2">
-  ${get('writer')} | ${get('date')}
-</p>
+  <p class="text-sm text-gray-600 mb-2">
+    ${get('writer')} | ${get('date')}
+  </p>
 
-<p class="italic text-gray-700 mb-3">“${get('highlight')}”</p>
+  <p class="italic text-gray-700 mb-3">
+    “${get('highlight')}”
+  </p>
 
-${get('image') ? `
-  <a href="lekha.html?slug=${item.file.name.replace('.md','')}"
-     class="block">
+  ${get('image') ? `
     <div class="w-full h-32 overflow-hidden rounded mb-3">
-      <img src="${get('image')}"
-           class="w-full h-full object-cover hover:opacity-90 transition">
+      <img src="${get('image')}" class="w-full h-full object-cover">
     </div>
-  </a>
-` : ''}
+  ` : ''}
 
-<a href="lekha.html?slug=${item.file.name.replace('.md','')}"
-   class="text-ku-blue font-semibold hover:underline">
-   Read More →
-</a>
-        `;
+  <span class="text-ku-blue font-semibold">
+    Read More →
+  </span>
+`;
 
         grid.appendChild(card);
 
@@ -302,6 +302,7 @@ ${get('image') ? `
 
 </body>
 </html>
+
 
 
 
