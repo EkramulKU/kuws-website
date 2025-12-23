@@ -178,6 +178,7 @@ tailwind.config = {
 
 <script>
 document.getElementById('current-year').textContent = new Date().getFullYear();
+
 const CATEGORY_ORDER = [
   "ফিচার",
   "মতামত",
@@ -190,79 +191,41 @@ const CATEGORY_ORDER = [
   "বিজ্ঞান ও প্রযুক্তি"
 ];
 
-fetch('https://api.github.com/repos/EkramulKU/kuws-website/contents/content/writings?ref=main',{cache:'no-store'})
-.then(res=>res.json())
-.then(files=>{
-  const list=document.getElementById('article-list');
-  const ticker=document.getElementById('headline-titles');
-  const latest=document.getElementById('latest-7');
-
-list.innerHTML = '';
-
 const categoryMap = {};
 CATEGORY_ORDER.forEach(c => categoryMap[c] = []);
 
-files
-  .filter(f => f.name.endsWith('.md'))
-  .forEach(file => {
-    fetch(file.download_url)
-      .then(r => r.text())
-      .then(text => {
-        const get = v => text.match(new RegExp(v + ':\\s*(.*)'))?.[1] || '';
-        const category = get('type');
+fetch('https://api.github.com/repos/EkramulKU/kuws-website/contents/content/writings?ref=main', {
+  cache: 'no-store'
+})
+.then(res => res.json())
+.then(files => {
+  files
+    .filter(f => f.name.endsWith('.md'))
+    .forEach(file => {
+      fetch(file.download_url)
+        .then(r => r.text())
+        .then(text => {
+          const get = v => text.match(new RegExp(v + ':\\s*(.*)'))?.[1] || '';
+          const category = get('type');
 
-        if (categoryMap[category]) {
-          categoryMap[category].push({ file, text });
-        }
-      });
-  });
-
-setTimeout(renderCategories, 800);
-
-
-
-    fetch(file.download_url)
-    .then(r=>r.text())
-    .then(text=>{
-      const get=v=>text.match(new RegExp(v+':\\s*(.*)'))?.[1]||'';
-      const body=text.split('---').pop().trim();
-
-      const card=document.createElement('div');
-      card.className="bg-white rounded-xl shadow p-6";
-
-      card.innerHTML=`
-        <p class="text-sm text-ku-gold mb-1">${get('type')}</p>
-        <h2 class="text-2xl font-bold text-ku-blue mb-1">${get('title')}</h2>
-        <p class="text-sm text-gray-600 mb-2">${get('writer')} | ${get('date')}</p>
-        <p class="italic text-gray-700 mb-4">“${get('highlight')}”</p>
-${get('image') ? `
-  <div class="w-full h-40 overflow-hidden rounded-lg mb-4">
-    <img src="${get('image')}"
-         class="w-full h-full object-cover">
-  </div>
-` : ''}
-
-        <a href="lekha.html?slug=${file.name.replace('.md','')}"
-           class="text-ku-blue font-semibold hover:underline">
-           Read More →
-        </a>
-      `;
-      list.appendChild(card);
-
-      ticker.innerHTML+=` 🔹 ${get('title')} `;
-      if(i<7){
-        latest.innerHTML+=`<li>• ${get('title')}</li>`;
-      }
+          if (categoryMap[category]) {
+            categoryMap[category].push({ file, text });
+          }
+        });
     });
-  });
+
+  setTimeout(renderCategories, 800);
 });
 
-  function renderCategories() {
+function renderCategories() {
   const list = document.getElementById('article-list');
   const ticker = document.getElementById('headline-titles');
   const latest = document.getElementById('latest-7');
 
   list.innerHTML = '';
+  ticker.innerHTML = '';
+  latest.innerHTML = '';
+
   let latestCount = 0;
 
   CATEGORY_ORDER.forEach(category => {
@@ -279,17 +242,16 @@ ${get('image') ? `
           আরও দেখুন →
         </a>
       </div>
-      <div class="grid md:grid-cols-2 gap-6" id="cat-${category}"></div>
+      <div class="grid md:grid-cols-2 gap-6"></div>
     `;
 
+    const grid = section.querySelector('div.grid');
     list.appendChild(section);
 
-    const grid = section.querySelector(`#cat-${CSS.escape(category)}`);
-
     categoryMap[category]
-      .reverse()
+      .sort((a, b) => b.file.name.localeCompare(a.file.name)) // latest first
       .slice(0, 4)
-      .forEach((item, i) => {
+      .forEach(item => {
         const get = v => item.text.match(new RegExp(v + ':\\s*(.*)'))?.[1] || '';
 
         const card = document.createElement('div');
@@ -321,11 +283,12 @@ ${get('image') ? `
       });
   });
 }
-
 </script>
+
 
 </body>
 </html>
+
 
 
 
