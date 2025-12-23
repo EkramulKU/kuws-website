@@ -50,25 +50,41 @@ collections:
       - { label: "Year", name: "year", widget: "string" }
 
   # ================= WRITINGS / LEKHA =================
-  - name: "writings"
+    - name: "writings"
     label: "✍️ Writings (Lekha)"
     folder: "content/writings"
     create: true
     slug: "{{year}}{{month}}{{day}}{{hour}}{{minute}}"
     editor:
       preview: false
+
     fields:
       - { label: "Title", name: "title", widget: "string" }
 
-      - label: "Type"
+      - label: "Category"
         name: "type"
         widget: "select"
-        options: ["মতামত", "কবিতা", "গল্প"]
+        options:
+          - "ফিচার"
+          - "মতামত"
+          - "চিঠি-পত্র"
+          - "কবিতা"
+          - "গল্প"
+          - "সাক্ষাৎকার"
+          - "ভ্রমণ"
+          - "ধর্ম"
+          - "বিজ্ঞান ও প্রযুক্তি"
 
       - { label: "Writer", name: "writer", widget: "string" }
       - { label: "Writer Introduction", name: "intro", widget: "string" }
-      - { label: "Publish Date & Time", name: "date", widget: "datetime", format: "DD-MM-YYYY HH:mm", date_format: "DD-MM-YYYY", time_format: "HH:mm", picker_utc: false }
 
+      - { label: "Publish Date & Time",
+          name: "date",
+          widget: "datetime",
+          format: "DD-MM-YYYY HH:mm",
+          date_format: "DD-MM-YYYY",
+          time_format: "HH:mm",
+          picker_utc: false }
 
       - { label: "Headline Image", name: "image", widget: "image", required: false }
 
@@ -78,23 +94,8 @@ collections:
 
       - { label: "Uploader", name: "uploader", widget: "string", default: "Admin" }
 
-      # ---------- Open Graph (Social Share) ----------
-      - label: "OG Title"
-        name: "og_title"
-        widget: "string"
-        required: false
-        hint: "খালি রাখলে Title ব্যবহার হবে"
-
-      - label: "OG Description"
-        name: "og_description"
-        widget: "text"
-        required: false
-        hint: "খালি রাখলে Highlight ব্যবহার হবে"
-
-      - label: "OG Image"
-        name: "og_image"
-        widget: "image"
-        required: false
-        hint: "খালি রাখলে Headline Image ব্যবহার হবে"
-
+      # Open Graph
+      - { label: "OG Title", name: "og_title", widget: "string", required: false }
+      - { label: "OG Description", name: "og_description", widget: "text", required: false }
+      - { label: "OG Image", name: "og_image", widget: "image", required: false }
       - { label: "Body", name: "body", widget: "markdown" }
