@@ -190,9 +190,10 @@ fetch('https://api.github.com/repos/EkramulKU/kuws-website/contents/content/writ
   let count=0;
 
 files
-  .filter(f => f.type === "file" && f.name.endsWith('.md'))
+  .filter(f => f.name.endsWith('.md'))
   .reverse()
   .forEach((file,i)=>{
+
 
     fetch(file.download_url)
     .then(r=>r.text())
@@ -208,7 +209,13 @@ files
         <h2 class="text-2xl font-bold text-ku-blue mb-1">${get('title')}</h2>
         <p class="text-sm text-gray-600 mb-2">${get('writer')} | ${get('date')}</p>
         <p class="italic text-gray-700 mb-4">“${get('highlight')}”</p>
-        ${get('image')?`<img src="${get('image')}" class="rounded mb-4">`:''}
+${get('image') ? `
+  <div class="w-full h-40 overflow-hidden rounded-lg mb-4">
+    <img src="${get('image')}"
+         class="w-full h-full object-cover">
+  </div>
+` : ''}
+
         <a href="lekha.html?slug=${file.name.replace('.md','')}"
            class="text-ku-blue font-semibold hover:underline">
            Read More →
@@ -227,6 +234,7 @@ files
 
 </body>
 </html>
+
 
 
 
