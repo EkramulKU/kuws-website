@@ -1,0 +1,29 @@
+---
+layout: base.njk
+pagination:
+  data: collections.writings
+  size: 1
+  alias: post
+permalink: "lekha/{{ post.fileSlug }}/index.html"
+---
+
+<article class="max-w-3xl mx-auto px-4 py-10 lekha-body">
+
+  <p class="text-sm text-ku-gold mb-2">{{ post.data.type }}</p>
+
+  <h1 class="text-3xl font-bold mb-2">{{ post.data.title }}</h1>
+
+  <p class="text-sm text-gray-600 mb-4">
+    {{ post.data.writer }} | {{ post.data.date }}
+  </p>
+
+  {% if post.data.image %}
+  <img src="{{ post.data.image }}" class="w-full rounded mb-6">
+  {% endif %}
+
+  {{ post.templateContent | safe }}
+
+  <p class="mt-8 text-sm text-gray-500">
+    Uploaded by: {{ post.data.uploader }}
+  </p>
+</article>
