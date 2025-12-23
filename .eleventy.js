@@ -1,23 +1,15 @@
 module.exports = function (eleventyConfig) {
-
-  // Markdown support (default is enough)
-  eleventyConfig.setLibrary("md", require("markdown-it")({
-    html: true,
-    breaks: true,
-    linkify: true
-  }));
-
-  // Static assets passthrough
+  // Static assets
   eleventyConfig.addPassthroughCopy("images");
   eleventyConfig.addPassthroughCopy("admin");
+  eleventyConfig.addPassthroughCopy("content");
 
   return {
     dir: {
       input: "src",
-      output: "_site",
-      data: "../content"
-    },
-    markdownTemplateEngine: "njk",
-    htmlTemplateEngine: "njk"
+      includes: "_includes",
+      layouts: "_layouts",
+      output: "_site"
+    }
   };
 };
