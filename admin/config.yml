@@ -57,45 +57,47 @@ collections:
     slug: "{{year}}{{month}}{{day}}{{hour}}{{minute}}"
     editor:
       preview: false
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
+fields:
+  - { label: "Layout", name: "layout", widget: "hidden", default: "lekha.njk" }
 
-      - label: "Category"
-        name: "type"
-        widget: "select"
-        options:
-          - "ফিচার"
-          - "মতামত"
-          - "চিঠি-পত্র"
-          - "কবিতা"
-          - "গল্প"
-          - "সাক্ষাৎকার"
-          - "ভ্রমণ"
-          - "ধর্ম"
-          - "বিজ্ঞান ও প্রযুক্তি"
+  - { label: "Title", name: "title", widget: "string" }
 
-      - { label: "Writer", name: "writer", widget: "string" }
-      - { label: "Writer Introduction", name: "intro", widget: "string" }
+  - label: "Category"
+    name: "type"
+    widget: "select"
+    options:
+      - "ফিচার"
+      - "মতামত"
+      - "চিঠি-পত্র"
+      - "কবিতা"
+      - "গল্প"
+      - "সাক্ষাৎকার"
+      - "ভ্রমণ"
+      - "ধর্ম"
+      - "বিজ্ঞান ও প্রযুক্তি"
 
-      - label: "Publish Date & Time"
-        name: "date"
-        widget: "datetime"
-        format: "DD-MM-YYYY HH:mm"
-        date_format: "DD-MM-YYYY"
-        time_format: "HH:mm"
-        picker_utc: false
+  - { label: "Writer", name: "writer", widget: "string" }
 
-      - { label: "Headline Image", name: "image", widget: "image", required: false }
+  - { label: "Writer Introduction", name: "intro", widget: "string" }
 
-      - label: "Highlight (Homepage + OG)"
-        name: "highlight"
-        widget: "text"
+  - { label: "Publish Date & Time",
+      name: "date",
+      widget: "datetime",
+      format: "DD-MM-YYYY HH:mm",
+      date_format: "DD-MM-YYYY",
+      time_format: "HH:mm",
+      picker_utc: false }
 
-      - { label: "Uploader", name: "uploader", widget: "string", default: "Admin" }
+  - { label: "Headline Image", name: "image", widget: "image", required: false }
 
-      # ---------- Open Graph ----------
-      - { label: "OG Title", name: "og_title", widget: "string", required: false }
-      - { label: "OG Description", name: "og_description", widget: "text", required: false }
-      - { label: "OG Image", name: "og_image", widget: "image", required: false }
+  - label: "Highlight (Homepage + OG)"
+    name: "highlight"
+    widget: "text"
 
-      - { label: "Body", name: "body", widget: "markdown" }
+  - { label: "Uploader", name: "uploader", widget: "string", default: "Admin" }
+
+  - { label: "OG Title", name: "og_title", widget: "string", required: false }
+  - { label: "OG Description", name: "og_description", widget: "text", required: false }
+  - { label: "OG Image", name: "og_image", widget: "image", required: false }
+
+  - { label: "Body", name: "body", widget: "markdown" }
