@@ -1,11 +1,25 @@
-module.exports = function ({ collections }) {
-  const map = {};
+module.exports = function (data) {
+  // Eleventy build এর শুরুতে collections undefined হতে পারে
+  const writings = data?.collections?.writings || [];
 
-  collections.writings.forEach(item => {
+  // লেখা না থাকলে empty object return করো
+  if (!writings.length) {
+    return {};
+  }
+
+  const categories = {};
+
+  writings.forEach(item => {
     const cat = item.data.type;
-    if (!map[cat]) map[cat] = [];
-    map[cat].push(item);
+    if (!cat) return;
+
+    if (!categories[cat]) {
+      categories[cat] = [];
+    }
+
+    categories[cat].push(item);
   });
 
-  return map;
+  return categories;
 };
+
