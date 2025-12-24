@@ -25,7 +25,7 @@ title: "Latest Writings | KU Writers' Society"
     ] %}
 
     {% for cat in categories %}
-      {% set items = collections.writings | filter("data.type", cat) %}
+      {% set items = collections.writings %}
       {% if items.length > 0 %}
       <section>
         <div class="flex justify-between mb-4">
@@ -81,4 +81,5 @@ title: "Latest Writings | KU Writers' Society"
   </aside>
 
 </div>
+
 
